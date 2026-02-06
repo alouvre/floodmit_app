@@ -1,0 +1,9 @@
+pandas
+numpy
+requests
+openmeteo-requests
+requests-cache
+scikit-learn
+tensorflow
+matplotlib
+streamlit
