@@ -35,10 +35,11 @@ try:
     for row in rows:
         cols = row.find_all('td')
         
+        # Col 1 & Col 2
         lokasi_pengamatan = cols[1].text.strip()
         sungai = cols[2].text.strip()
         
-        # Kolom TMA
+        # Kolom TMA (Col 3)
         tinggi_text = cols[3].find('span').text.strip()
         tinggi_air = int(tinggi_text) if tinggi_text.isdigit() else 0
         
