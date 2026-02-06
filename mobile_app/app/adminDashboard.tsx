@@ -13,6 +13,7 @@ import {
 } from "react-native";
 import { Ionicons, MaterialCommunityIcons, Feather } from "@expo/vector-icons";
 import { useReports } from "../context/ReportContext";
+import { useWaterLevel, WaterStation } from "../context/WaterLevelContext";
 import ReportCard from "../components/reports/ReportCard";
 
 // Sub-komponen Item Menu
@@ -29,6 +30,7 @@ export default function AdminDashboard() {
   const [menuVisible, setMenuVisible] = useState(false);
   const router = useRouter();
   const adminName = "Zavran";
+  const { stations: waterData, loading } = useWaterLevel();
 
   // Menghitung statistik berdasarkan status laporan
   const totalReports = reports.length;
@@ -139,51 +141,50 @@ export default function AdminDashboard() {
             {waterData.length > 1 && <View style={styles.stepperLine} />}
 
             {/* 2. Loop Data Pintu Air secara Dinamis */}
-            {waterData.map((station, index) => (
-              <React.Fragment key={station.id}>
-                <TouchableOpacity
-                  style={styles.stepperItem}
-                  onPress={() =>
-                    router.push({
-                      pathname: "/admin/statistics/[id]",
-                      params: { id: station.id },
-                    })
-                  }
+            {waterData.map((station: WaterStation, index: number) => (
+              <TouchableOpacity
+                key={station.id}
+                style={styles.stepperItem}
+                onPress={() =>
+                  router.push({
+                    pathname: "/admin/statistics/[id]",
+                    params: { id: station.id },
+                  })
+                }
+              >
+                {/* Badge Angka/Level */}
+                <View
+                  style={[
+                    styles.levelBadge,
+                    station.currentLevel > 200 && {
+                      borderColor: "#FF4D4D",
+                      backgroundColor: "#FFF5F5",
+                    },
+                  ]}
                 >
-                  {/* Badge Angka/Level */}
-                  <View
+                  <Text
                     style={[
-                      styles.levelBadge,
-                      station.currentLevel > 200 && {
-                        borderColor: "#FF4D4D",
-                        backgroundColor: "#FFF5F5",
-                      },
+                      styles.levelText,
+                      station.currentLevel > 200 && { color: "#FF4D4D" },
                     ]}
                   >
-                    <Text
-                      style={[
-                        styles.levelText,
-                        station.currentLevel > 200 && { color: "#FF4D4D" },
-                      ]}
-                    >
-                      ↑ {station.currentLevel}cm
-                    </Text>
-                  </View>
-
-                  {/* Titik (Dot) */}
-                  <View
-                    style={[
-                      styles.dot,
-                      station.currentLevel > 200 && styles.dotActive,
-                    ]}
-                  />
-
-                  {/* Nama Stasiun */}
-                  <Text style={styles.stationName}>
-                    {station.name.replace(" ", "\n")}
+                    ↑ {station.currentLevel}cm
                   </Text>
-                </TouchableOpacity>
-              </React.Fragment>
+                </View>
+
+                {/* Titik (Dot) */}
+                <View
+                  style={[
+                    styles.dot,
+                    station.currentLevel > 200 && styles.dotActive,
+                  ]}
+                />
+
+                {/* Nama Stasiun */}
+                <Text style={styles.stationName}>
+                  {station.name.replace(" ", "\n")}
+                </Text>
+              </TouchableOpacity>
             ))}
             <View style={styles.stepperLine} />
             <View style={styles.stepperItem}>
