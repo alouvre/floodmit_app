@@ -60,10 +60,10 @@ try:
 
         # Data Object
         data_to_save = {
-            "lokasi": lokasi_pengamatan,
+            "lokasi_pengamatan": lokasi_pengamatan,
             "sungai": sungai,
-            "tma_cm": tinggi_air,
-            "tanggal_jam": waktu_pengamatan,
+            "tinggi_air": tinggi_air,
+            "waktu_pengamatan": waktu_pengamatan,
             "status": status,
             "tren": tren
         }
