@@ -25,6 +25,10 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r tma_scraper/requirements.txt
 
+      - name: Check Files
+        run: |
+          ls -R
+
       - name: Run Scraper
         env:
           SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
