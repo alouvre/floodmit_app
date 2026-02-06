@@ -49,7 +49,7 @@ try:
             # Kolom Tanggal (Col 5) & Jam (Col 6)
             tanggal = cols[5].find('span').text.strip()
             jam = cols[6].find('span').text.strip()
-            waktu_gabungan = f"{tanggal} {jam}" # Contoh: "06/02/2026 18:00"
+            waktu_pengamatan = f"{tanggal} {jam}" # Contoh: "06/02/2026 18:00"
             
             # Deteksi Status (Col 7)
             status_src = cols[7].find('img')['src'] if cols[7].find('img') else ""
@@ -63,7 +63,7 @@ try:
                 "lokasi": lokasi_pengamatan,
                 "sungai": sungai,
                 "tma_cm": tinggi_air,
-                "tanggal_jam": waktu_gabungan,
+                "tanggal_jam": waktu_pengamatan,
                 "status": status,
                 "tren": tren
             }
@@ -71,7 +71,7 @@ try:
             try:
                 # Simpan ke Supabase
                 supabase.table("water_level_history").insert(data_to_save).execute()
-                print(f"✔️ Berhasil simpan: {lokasi_pengamatan} ({sungai}) - {tinggi_air}cm - {waktu_gabungan}")
+                print(f"✔️ Berhasil simpan: {lokasi_pengamatan} ({sungai}) - {tinggi_air}cm - {waktu_pengamatan}")
             except Exception as e:
                 print(f"⚠️ Gagal simpan {lokasi_pengamatan}. Error: {e}")
 
