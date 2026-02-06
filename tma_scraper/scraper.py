@@ -75,7 +75,7 @@ try:
             print(f"✔️ Berhasil simpan: {lokasi_pengamatan} ({sungai}) - {tinggi_air}cm - {waktu_pengamatan}")
         except Exception as e:
             print(f"⚠️ Gagal simpan {lokasi_pengamatan}. Error: {e}")
-            print(f"❌ Gagal mengambil data. Status code: {response.status_code}")
+        
 
 except Exception as e:
-    print(f"❌ Terjadi kesalahan fatal: {e}")
+    print(f"❌ Gagal mengambil data. Status code: {response.status_code}. Error: {e}")
