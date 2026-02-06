@@ -1,0 +1,14 @@
+# Mobile App
+mobile_app/node_modules/
+mobile_app/.expo/
+mobile_app/dist/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+tma_scraper/venv/
+.env
+
+# OS
+.DS_Store
